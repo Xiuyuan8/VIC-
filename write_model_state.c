@@ -6,7 +6,8 @@
 static char vcid[] = "$Id: write_model_state.c,v 5.16.2.9 2010/03/05 23:17:27 vicadmin Exp $";
 
 
-void write_model_state(dist_prcp_struct    *prcp,
+void write_model_state(dmy_struct dmy,
+           dist_prcp_struct    *prcp,
 		       global_param_struct *gp,
 		       int                  Nveg,
 		       int                  cellnum,
@@ -114,6 +115,7 @@ void write_model_state(dist_prcp_struct    *prcp,
     fwrite( &Nbands, sizeof(int), 1, filep->statefile );
   }
   else {
+    fprintf( filep->statefile, "%i-%i-%i ", dmy.year, dmy.month, dmy.day);
     fprintf( filep->statefile, "%i %i %i", cellnum, Nveg, Nbands );
   }
   // This stores the number of bytes from after this value to the end 
@@ -236,6 +238,7 @@ void write_model_state(dist_prcp_struct    *prcp,
     if ( options.BINARY_STATE_FILE )
       fwrite( &prcp->mu[veg], sizeof(double), 1, filep->statefile );
     else
+      fprintf( filep->statefile, "%i-%i-%i ", dmy.year, dmy.month, dmy.day);
       fprintf( filep->statefile, "%f", prcp->mu[veg] );
     
     // Store distributed precipitation variables
@@ -257,6 +260,7 @@ void write_model_state(dist_prcp_struct    *prcp,
 	fwrite( &band, sizeof(int), 1, filep->statefile );
       }
       else {
+  fprintf( filep->statefile, "%i-%i-%i ", dmy.year, dmy.month, dmy.day);
 	fprintf( filep->statefile, "%i %i", veg, band );
       }
       
