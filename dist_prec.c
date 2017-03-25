@@ -233,13 +233,8 @@ int  dist_prec(atmos_data_struct   *atmos,
     (after the final time step of the assigned date)
   ************************************/
 
-  if ( filep->statefile != NULL
-       &&  ( dmy[rec].year == global_param->stateyear
-	     && dmy[rec].month == global_param->statemonth 
-	     && dmy[rec].day == global_param->stateday
-	     && ( rec+1 == global_param->nrecs
-		  || dmy[rec+1].day != global_param->stateday ) ) )
-    write_model_state(dmy[rec], prcp, global_param, veg_con[0].vegetat_type_num, 
+  if ( filep->statefile != NULL && dmy[rec].hour ==0)
+    write_model_state(prcp, global_param, veg_con[0].vegetat_type_num, 
 		      soil_con->gridcel, filep, soil_con,
 		      STILL_STORM, DRY_TIME, *lake_con);
 
