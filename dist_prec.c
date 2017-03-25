@@ -234,7 +234,7 @@ int  dist_prec(atmos_data_struct   *atmos,
   ************************************/
 
   if ( filep->statefile != NULL && dmy[rec].hour ==0)
-    write_model_state(prcp, global_param, veg_con[0].vegetat_type_num, 
+    write_model_state(dmy[rec],prcp, global_param, veg_con[0].vegetat_type_num, 
 		      soil_con->gridcel, filep, soil_con,
 		      STILL_STORM, DRY_TIME, *lake_con);
 
